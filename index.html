@@ -17,19 +17,24 @@
   <body>
     <ul id="messages"></ul>
     <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+      <input id="m" autocomplete="off" autofocus="on"/><button>Send</button>
     </form>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      // const urlParams = new URLSearchParams(window.location.search);
-      // const myParam = urlParams.get('uname');
+      const urlParams = new URLSearchParams(window.location.search);
+      const myParam = urlParams.get('uname');
       $(function () {
         // "https://realtime-chat-system.herokuapp.com"
-        var socket = io("https://realtime-chat-system.herokuapp.com");
+        var socket = io("");
         $('form').submit(function(){
-          socket.emit('chat message', $('#m').val());
+          if ($('#m').val() == "") {
+            return false;
+          }
+          var msg = myParam + ": " + $('#m').val();
+          socket.emit('chat message', msg);
           $('#m').val('');
+          $('form').focus();
           return false;
         });
         socket.on('chat message', function(msg){
