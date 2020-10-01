@@ -22,8 +22,15 @@
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const myParam = urlParams.get('uname');
+      $.urlParam = function(name){
+          var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+          if (results == null){
+            return null;
+          }
+          else {
+            return decodeURI(results[1]) || 0;
+          }
+      }
       $(function () {
         // "https://realtime-chat-system.herokuapp.com"
         var socket = io("");
@@ -31,7 +38,7 @@
           if ($('#m').val() == "") {
             return false;
           }
-          var msg = myParam + ": " + $('#m').val();
+          var msg = $.urlParam('uname') + ": " + $('#m').val();
           socket.emit('chat message', msg);
           $('#m').val('');
           $('form').focus();
