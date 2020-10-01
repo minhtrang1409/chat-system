@@ -41,7 +41,7 @@
           var msg = $.urlParam('uname') + ": " + $('#m').val();
           socket.emit('chat message', msg);
           $('#m').val('');
-          $('form').focus();
+          $('#m').focus();
           return false;
         });
         socket.on('chat message', function(msg){
