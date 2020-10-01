@@ -25,12 +25,8 @@
       const urlParams = new URLSearchParams(window.location.search);
       const myParam = urlParams.get('uname');
       $(function () {
-<<<<<<< HEAD
         // "https://realtime-chat-system.herokuapp.com"
         var socket = io("https://realtime-chat-system.herokuapp.com");
-=======
-        var socket = io("https://realtime-chat-system.herokuapp.com/");
->>>>>>> parent of c5526c0... Update index.html
         $('form').submit(function(){
           socket.emit('chat message', $('#m').val());
           $('#m').val('');

@@ -4,9 +4,9 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
 app.get('/', function(req, res){
-  if(req.query.uname == null) {
-    return;
-  }
+  // if(req.query.uname == null) {
+  //   return;
+  // }
   res.sendFile(__dirname + '/index.html');
 });
 
